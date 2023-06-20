@@ -6,7 +6,7 @@ from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework import status
-from users.models import User
+from .models import User
 from django.conf import settings
 import jwt
 from django.contrib.auth.signals import user_logged_in

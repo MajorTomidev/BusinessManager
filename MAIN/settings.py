@@ -40,8 +40,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tailor.apps.TailorConfig',
     'users.apps.UsersConfig',
+    'rest_framework_simplejwt',
+
     
 ]
+
+JWT_AUTH = {
+    'JWT_PAYLOAD_HANDLER':
+    'rest_framework_jwt.utils.jwt_payload_handler',
+
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'account.utils.jwt_response_payload_handler',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

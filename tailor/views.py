@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Male, Female
+from .models import Male, Female, Catalog, Receipt, Blog, Comment
 from django.contrib import messages
-from .forms import MeasurementForm
+from .forms import MaleForm, FemaleForm, CommentForm
 
 # Create your views here.
-def Malenote (request):
+# MALE VIEW ----------------------------------------------------------------------------------------------------------------
+def MaleView (request):
     if request.method == 'POST':
         client_name = request.POST.get('client_name')
         client_address = request.POST.get('client_address')
@@ -37,21 +38,21 @@ def Malenote (request):
         
     else: 
 
-        return render(request, 'measurement/index.html')
+        return render(request, 'tailor/index.html')
     
 
-def Tailornote2(request):
+def MaleViewTest(request):
     if request.method == 'POST':
-        form = MeasurementForm(request.POST)
+        form = MaleForm(request.POST)
         if form.is_valid():
             form.save()
     else:
-        form = MeasurementForm()
+        form = MaleForm()
     context = {'form': form}
-    return render(request, 'measurement/test.html', context)
+    return render(request, 'tailor/test.html', context)
 
-
-def Femalenote(request):
+# FEMALE VIEW --------------------------------------------------------------------------------------------------
+def FemaleView(request):
     if request.method == 'POST':
         client_name = request.POST.get('client_name')
         client_address = request.POST.get('client_address')
@@ -78,4 +79,97 @@ def Femalenote(request):
         
     else: 
 
-        return render(request, 'measurement/index.html')
+        return render(request, 'tailor/index.html')
+    
+def FemaleViewTest(request):
+    if request.method == 'POST':
+        form = FemaleForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = FemaleForm()
+    context = {'form': form}
+    return render(request, 'tailor/test.html', context)
+    
+# CATALOG VIEW --------------------------------------------------------------------------------------------
+
+def CatalogView(request):
+    catalog = Catalog.objects.all()
+    
+    return render(request, 'tailor/catalog.html', {"catalog": catalog})
+
+
+def CatalogSingleView (request, post_id):
+
+    single_product = Catalog.objects.get(id=post_id)
+    context={
+            'single_product' : single_product
+        }
+
+    return render(request,'tailor/catalog_single.html', context)
+
+# RECEIPT VIEW -----------------------------------------------------------------------------------------
+
+def ReceiptView(request):
+    receipt = Receipt.objects.all()
+    
+    return render(request, 'tailor/receipt.html', {"receipt": receipt})
+
+def ReceiptSingleView (request, post_id):
+
+    single_receipt = Receipt.objects.get(id=post_id)
+    context={
+            'single_receipt' : single_receipt
+        }
+
+    return render(request,'tailor/receipt_single.html', context)
+
+
+# BLOG VIEW --------------------------------------------------------------------------------------------
+
+def BlogSingleView (request, post_id):
+
+    single_blog= Blog.objects.get(id=post_id)
+    context={
+            'single_blog' : single_blog
+        }
+
+    return render(request,'tailor/blog_single.html', context)
+
+
+def BlogView(request):
+    blog = Blog.objects.all().order_by('date_posted')[5:]
+    comment = Comment.objects.all()
+    context = { "blog": blog, 'comment': comment }
+    
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        comment = request.POST.get('comment')
+        
+        comment_blog = Comment.objects.create(name=name, email=email, comment=comment)
+
+        
+        comment_blog.save()
+        messages.success(request, 'Your comment has been sent successfully.')
+        return redirect('commentpage')
+        
+    else: 
+
+        return render(request, 'tailor/blog.html', context)
+    
+
+def CommentViewTest(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        
+        form.save()
+        messages.success(request, 'Your comment has been sent successfully.')
+    else:
+        form = CommentForm()
+    context = {'form': form}
+    return render(request, 'tailor/test.html', context)
+
+
+
+

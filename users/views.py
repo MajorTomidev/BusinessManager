@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.generics import RetrieveUpdateAPIView
-from .serializers import UserSerializer
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework import status
@@ -12,11 +11,12 @@ from django.conf import settings
 import jwt
 from django.contrib.auth.signals import user_logged_in
 from rest_framework_jwt.utils import jwt_payload_handler
-from .serializers import UserRegistrationSerializer, UserSerializer, UserProfileSerializer
+from .serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated
 from .models import Profile
 
 # Create your views here.
+
 
 class CreateUserAPIView(APIView):
     # Allow any user (authenticated or not) to access this url 
@@ -95,6 +95,9 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 
-        
+
+
+
+
 
 

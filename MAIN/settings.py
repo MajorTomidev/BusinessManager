@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     'tailor.apps.TailorConfig',
     'users.apps.UsersConfig',
     'rest_framework_simplejwt',
-
-    
+    'rest_framework',
 ]
 
 JWT_AUTH = {

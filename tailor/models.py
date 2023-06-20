@@ -39,7 +39,7 @@ class Male(models.Model):
     class Meta:
         verbose_name = ('Male')
         verbose_name_plural = ('Male Measurements')
-        ordering = ['id']
+        ordering = ['client_name']
 
 # FEMALE MEASUREMENTS ------------------------------------------------------------------------------------------------------
 
@@ -69,7 +69,7 @@ class Female(models.Model):
     class Meta:
         verbose_name = ('Female')
         verbose_name_plural = ('Female Measurements')
-        ordering = ['id']
+        ordering = ['client_name']
 
 # CATALOG ------------------------------------------------------------------------------------------------------------------
 
@@ -88,7 +88,7 @@ class Catalog (models.Model):
     class Meta:
         verbose_name = ('Catalog')
         verbose_name_plural = ('Catalogues')
-        ordering = ['id']
+        ordering = ['product_name']
     
 # RECEIPTS --------------------------------------------------------------------------------------------------------------
 
@@ -114,7 +114,7 @@ class Receipt (models.Model):
    class Meta:
         verbose_name = ('Receipt')
         verbose_name_plural = ('Receipts')
-        ordering = ['id']
+        ordering = ['unique_ID']
 
 
 # BLOG ----------------------------------------------------------------------------------------------------------------
@@ -155,7 +155,7 @@ class Comment(models.Model):
         verbose_name = ('Comment')
         verbose_name_plural = ('Comments')
         ordering = (
-            '-date_posted',
+            '-date',
         )
 
     

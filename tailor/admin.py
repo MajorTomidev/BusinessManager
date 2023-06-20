@@ -32,9 +32,9 @@ class CatalogAdmin(admin.ModelAdmin):
 
 @admin.register(models.Receipt)
 class ReceiptAdmin(admin.ModelAdmin):
-    list_display = ["unique_ID", "full_name", "invoice_date", "delivery_date", "total_price"]
-    list_filter = [ "unique_ID", "full_name", "phone_number", "delivery_date"]
-    search_fields = ["unique_ID", "full_name", "phone_number"]
+    list_display = ["unique_ID", "client_name", "invoice_date", "delivery_date", "total_price"]
+    list_filter = [ "unique_ID", "client_name", "phone_number", "delivery_date"]
+    search_fields = ["unique_ID", "client_name", "phone_number"]
 
 
 # BLOG ADMIN --------------------------------------------------------------------------------------

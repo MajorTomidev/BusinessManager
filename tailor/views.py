@@ -148,9 +148,6 @@ def BlogView(request):
         comment = request.POST.get('comment')
         
         comment_blog = Comment.objects.create(name=name, email=email, comment=comment)
-
-        
-        comment_blog.save()
         messages.success(request, 'Your comment has been sent successfully.')
         return redirect('commentpage')
         

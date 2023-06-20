@@ -6,7 +6,6 @@ from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework import status
-from .models import User
 from django.conf import settings
 import jwt
 from django.contrib.auth.signals import user_logged_in
@@ -14,6 +13,9 @@ from rest_framework_jwt.utils import jwt_payload_handler
 from .serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated
 from .models import Profile
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 # Create your views here.
 
